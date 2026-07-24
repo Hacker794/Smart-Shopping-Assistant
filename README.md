@@ -43,7 +43,7 @@ The website is designed to work on both mobile and desktop screens. It includes 
 ## Project Structure
 
 ```text
-smart-shopping-assistant/
+WEB-ENGINEERING/
 │
 ├── index.html
 ├── style.css
