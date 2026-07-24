@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="A responsive Smart Shopping Assistant that lets users search for products, add items to a basket and view a live total."
+    >
+
+    <title>Smart Shopping Assistant</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <a href="#home" class="logo" aria-label="SmartCart home">
+            <span class="logo-icon">S</span>
+            <span>SMARTCART</span>
+        </a>
+
+        <nav class="navigation" aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#basket">Basket</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <a href="#products" class="header-button">
+            Start shopping
+        </a>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <p class="eyebrow">SMART SHOPPING MADE SIMPLE</p>
+
+                <h1>
+                    Find what you need.
+                    <span>Shop more intelligently.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Search through our products, filter by aisle and build
+                    your basket while your total updates instantly.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#products" class="primary-button">
+                        Browse products
+                    </a>
+
+                    <a href="#about" class="secondary-button">
+                        How it works
+                    </a>
+                </div>
+
+                <div class="hero-statistics">
+                    <div>
+                        <strong id="hero-product-count">0</strong>
+                        <span>Products</span>
+                    </div>
+
+                    <div>
+                        <strong>8</strong>
+                        <span>Aisles</span>
+                    </div>
+
+                    <div>
+                        <strong>Live</strong>
+                        <span>Basket total</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-display" aria-hidden="true">
+                <div class="floating-card top-card">
+                    <span class="floating-icon">✓</span>
+
+                    <div>
+                        <strong>Product added</strong>
+                        <p>Your basket has been updated</p>
+                    </div>
+                </div>
+
+                <div class="preview-window">
+                    <div class="preview-header">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="preview-content">
+                        <div class="preview-sidebar">
+                            <div class="preview-logo"></div>
+                            <div class="preview-line active"></div>
+                            <div class="preview-line"></div>
+                            <div class="preview-line"></div>
+                            <div class="preview-line"></div>
+                        </div>
+
+                        <div class="preview-main">
+                            <div class="preview-title"></div>
+
+                            <div class="preview-grid">
+                                <div class="preview-product">
+                                    <div class="preview-image">🥖</div>
+                                    <div class="preview-small-line"></div>
+                                    <div class="preview-price"></div>
+                                </div>
+
+                                <div class="preview-product">
+                                    <div class="preview-image">🥛</div>
+                                    <div class="preview-small-line"></div>
+                                    <div class="preview-price"></div>
+                                </div>
+
+                                <div class="preview-product">
+                                    <div class="preview-image">🍌</div>
+                                    <div class="preview-small-line"></div>
+                                    <div class="preview-price"></div>
+                                </div>
+
+                                <div class="preview-product">
+                                    <div class="preview-image">🍝</div>
+                                    <div class="preview-small-line"></div>
+                                    <div class="preview-price"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="floating-card bottom-card">
+                    <span>Basket total</span>
+                    <strong>£12.45</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="shopping-section" id="products">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">PRODUCT CATALOGUE</p>
+                    <h2>Shop our products</h2>
+
+                    <p>
+                        Search by product name or filter products by aisle.
+                    </p>
+                </div>
+
+                <div class="results-message">
+                    <strong id="result-count">0</strong>
+                    <span>products found</span>
+                </div>
+            </div>
+
+            <div class="shopping-layout">
+                <section
+                    class="products-panel"
+                    aria-labelledby="products-heading"
+                >
+                    <h2 id="products-heading" class="visually-hidden">
+                        Product results
+                    </h2>
+
+                    <div class="product-controls">
+                        <div class="search-control">
+                            <label for="search">
+                                Search products
+                            </label>
+
+                            <div class="input-wrapper">
+                                <span aria-hidden="true">⌕</span>
+
+                                <input
+                                    type="search"
+                                    id="search"
+                                    placeholder="Search products..."
+                                    autocomplete="off"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="filter-control">
+                            <label for="aisle-filter">
+                                Filter by aisle
+                            </label>
+
+                            <select id="aisle-filter">
+                                <option value="all">All aisles</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-control">
+                            <label for="sort-products">
+                                Sort products
+                            </label>
+
+                            <select id="sort-products">
+                                <option value="default">
+                                    Recommended
+                                </option>
+
+                                <option value="price-low">
+                                    Price: low to high
+                                </option>
+
+                                <option value="price-high">
+                                    Price: high to low
+                                </option>
+
+                                <option value="name">
+                                    Name: A to Z
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div
+                        id="product-results"
+                        class="product-grid"
+                        aria-live="polite"
+                    ></div>
+                </section>
+
+                <aside
+                    class="basket-panel"
+                    id="basket"
+                    aria-labelledby="basket-heading"
+                >
+                    <div class="basket-heading">
+                        <div>
+                            <p class="eyebrow">YOUR ORDER</p>
+                            <h2 id="basket-heading">My basket</h2>
+                        </div>
+
+                        <span id="basket-count" class="basket-count">
+                            0
+                        </span>
+                    </div>
+
+                    <p
+                        id="empty-basket-message"
+                        class="empty-basket-message"
+                    >
+                        Your basket is currently empty.
+                    </p>
+
+                    <ul
+                        id="basket-items"
+                        class="basket-items"
+                        aria-live="polite"
+                    ></ul>
+
+                    <div class="basket-summary">
+                        <div>
+                            <span>Items</span>
+                            <strong id="summary-item-count">0</strong>
+                        </div>
+
+                        <div>
+                            <span>Delivery</span>
+                            <strong>Free</strong>
+                        </div>
+
+                        <div class="total-row">
+                            <span>Total</span>
+                            <strong id="basket-total">£0.00</strong>
+                        </div>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="clear-basket"
+                        class="clear-basket-button"
+                        disabled
+                    >
+                        Clear basket
+                    </button>
+                </aside>
+            </div>
+        </section>
+
+        <section class="about-section" id="about">
+            <div class="section-heading centred-heading">
+                <div>
+                    <p class="eyebrow">HOW IT WORKS</p>
+                    <h2>A faster way to build your basket</h2>
+
+                    <p>
+                        The interface has been kept simple so that users can
+                        find and add products without unnecessary steps.
+                    </p>
+                </div>
+            </div>
+
+            <div class="steps-grid">
+                <article class="step-card">
+                    <span>01</span>
+                    <h3>Search</h3>
+
+                    <p>
+                        Type a product name into the search box to instantly
+                        narrow down the results.
+                    </p>
+                </article>
+
+                <article class="step-card">
+                    <span>02</span>
+                    <h3>Browse</h3>
+
+                    <p>
+                        View product names, prices and aisles in a responsive
+                        product grid.
+                    </p>
+                </article>
+
+                <article class="step-card">
+                    <span>03</span>
+                    <h3>Add</h3>
+
+                    <p>
+                        Add products to your basket and remove individual
+                        items when needed.
+                    </p>
+                </article>
+
+                <article class="step-card">
+                    <span>04</span>
+                    <h3>Track</h3>
+
+                    <p>
+                        See the item count and basket total update immediately
+                        after every change.
+                    </p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="logo">
+            <span class="logo-icon">S</span>
+            <span>SMARTCART</span>
+        </div>
+
+        <p>
+            Created for the Knull Work Experience Programme.
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
