@@ -103,6 +103,13 @@ const PRODUCTS = [
         price: 3.75,
         aisle: "Dairy Alternatives",
         image: "🍔"
+    },
+    {
+        id: 16,
+        name: "Frozen mixed berries",
+        price: 3.40,
+        aisle: "Frozen",
+        image: "🫐"
     }
 ];
 
