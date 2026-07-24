@@ -6,8 +6,7 @@ The project allows users to search through products, add products to a basket an
 
 ## Live Website
 
-[View the Smart Shopping Assistant]
-https://github.com/Hacker794/Web-Engineering-Project.git
+[View the Smart Shopping Assistant](https://github.com/Hacker794/Web-Engineering-Project.git)
 
 ## Project Overview
 
