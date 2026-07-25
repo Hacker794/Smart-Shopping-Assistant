@@ -1019,6 +1019,13 @@ select:focus-visible {
     .steps-grid {
         grid-template-columns: 1fr;
     }
+    .weather-widget {
+        width: 100%;
+        border-radius: 16px;
+    }
+    .hero-statistics {
+        flex-wrap: wrap;
+    }
 }
 
 .weather-widget {
