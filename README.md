@@ -32,6 +32,22 @@ The website is designed to work on both mobile and desktop screens. It includes 
 - Basket saved using localStorage
 - Dark mode toggle
 
+## Live API
+
+The website uses the Open-Meteo API to display the current outside temperature.
+
+The app sends a GET request using JavaScript's `fetch()` function. The response is returned as JSON, and the current temperature is displayed in the store conditions widget.
+
+The API request handles three states:
+
+- Loading while the request is running
+- Success when weather data is returned
+- Failure if the network or API is unavailable
+
+The API does not require an API key.
+
+Possible problems include a slow internet connection, the API being unavailable or the response not containing the expected data.
+
 ## Technologies Used
 
 - HTML
