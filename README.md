@@ -59,7 +59,7 @@ Possible problems include a slow internet connection, the API being unavailable 
 ## Project Structure
 
 ```text
-WEB-ENGINEERING/
+Smart-Shopping-Assistant/
 │
 ├── index.html
 ├── style.css
