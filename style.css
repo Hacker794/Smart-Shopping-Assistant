@@ -1020,3 +1020,27 @@ select:focus-visible {
         grid-template-columns: 1fr;
     }
 }
+
+.weather-widget {
+    max-width: 360px;
+    margin-top: 1.5rem;
+    padding: 1rem 1.2rem;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 12px;
+}
+
+.weather-label {
+    margin: 0 0 0.3rem;
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.weather-status {
+    margin: 0;
+    color: var(--text-light);
+    font-weight: 700;
+}

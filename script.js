@@ -393,8 +393,74 @@ clearBasketButton.addEventListener(
     clearBasket
 );
 
+async function loadWeather() {
+    const weatherBox = document.querySelector("#weather");
+
+    weatherBox.textContent = "Loading store conditions...";
+
+    try {
+        const url =
+            "https://api.open-meteo.com/v1/forecast" +
+            "?latitude=51.5" +
+            "&longitude=-0.12" +
+            "&current=temperature_2m";
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        const temperature =
+            data.current.temperature_2m;
+
+        weatherBox.textContent =
+            `Outside temperature: ${temperature}°C`;
+    } catch (error) {
+        weatherBox.textContent =
+            "Weather unavailable right now.";
+
+        console.error(error);
+    }
+
+}async function loadWeather() {
+    const weatherBox = document.querySelector("#weather");
+
+    weatherBox.textContent = "Loading store conditions...";
+
+    try {
+        const url =
+            "https://api.open-meteo.com/v1/forecast" +
+            "?latitude=51.5" +
+            "&longitude=-0.12" +
+            "&current=temperature_2m";
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        const temperature =
+            data.current.temperature_2m;
+
+        weatherBox.textContent =
+            `Outside temperature: ${temperature}°C`;
+    } catch (error) {
+        weatherBox.textContent =
+            "Weather unavailable right now."; // graceful failure
+
+        console.error(error);
+    }
+}
+
 heroProductCount.textContent = PRODUCTS.length;
 
 populateAisleFilter();
 renderProducts();
 renderBasket();
+loadWeather();
