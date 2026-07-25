@@ -391,7 +391,6 @@ async function loadWeather() {
 
 heroProductCount.textContent = PRODUCTS.length;
 
-populateAisleFilter();
-renderProducts();
+loadProducts();
 renderBasket();
 loadWeather();
