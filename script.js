@@ -30,6 +30,10 @@ function formatPrice(price) {
 }
 
 function populateAisleFilter() {
+    aisleFilter.innerHTML = `
+        <option value="all">All aisles</option>
+    `;
+
     const aisles = [
         ...new Set(
             PRODUCTS.map(function (product) {
