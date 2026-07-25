@@ -64,6 +64,8 @@ Smart-Shopping-Assistant/
 ├── index.html
 ├── style.css
 ├── script.js
+├── app.py
+├── requirements.txt
 ├── README.md
 
 
