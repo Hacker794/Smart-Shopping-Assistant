@@ -220,6 +220,46 @@ function renderBasket() {
     clearBasketButton.disabled = itemTotal === 0;
 }
 
+async function loadProducts() {
+    productResults.innerHTML = `
+        <p class="no-results">
+            Loading products...
+        </p>
+    `;
+
+    resultCount.textContent = "0";
+
+    try {
+        const response = await fetch(
+            "http://127.0.0.1:5000/api/products"
+        );
+
+        if (!response.ok) {
+            throw new Error(
+                `HTTP error: ${response.status}`
+            );
+        }
+
+        PRODUCTS = await response.json();
+
+        heroProductCount.textContent = PRODUCTS.length;
+
+        populateAisleFilter();
+        renderProducts();
+    } catch (error) {
+        heroProductCount.textContent = "0";
+
+        productResults.innerHTML = `
+            <p class="no-results">
+                Products are unavailable right now.
+                Please try again later.
+            </p>
+        `;
+
+        console.error("Could not load products:", error);
+    }
+}
+
 function clearBasket() {
     basket = [];
 
