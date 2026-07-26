@@ -3,8 +3,18 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 
-# Allows the website and API to run on different local ports.
-CORS(app)
+CORS(
+    app,
+    resources={
+        r"/api/*": {
+            "origins": [
+                "https://hacker794.github.io",
+                "http://localhost:5500",
+                "http://127.0.0.1:5500"
+            ]
+        }
+    }
+)
 
 PRODUCTS = [
     {
@@ -121,6 +131,13 @@ PRODUCTS = [
     }
 ]
 
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({
+        "status": "online",
+        "service": "Smart Shopping Assistant API"
+    }), 200
+
 
 @app.route("/api/products", methods=["GET"])
 def get_products():
@@ -129,7 +146,9 @@ def get_products():
 
 @app.errorhandler(404)
 def route_not_found(error):
-    return jsonify({"error": "Route not found"}), 404
+    return jsonify({
+        "error": "Route not found"
+    }), 404
 
 
 if __name__ == "__main__":
