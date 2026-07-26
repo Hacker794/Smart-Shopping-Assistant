@@ -32,21 +32,33 @@ The website is designed to work on both mobile and desktop screens. It includes 
 - Basket saved using localStorage
 - Dark mode toggle
 
-## Live API
+## APIs and Live Data
 
-The website uses the Open-Meteo API to display the current outside temperature.
+This project uses two APIs.
 
-The app sends a GET request using JavaScript's `fetch()` function. The response is returned as JSON, and the current temperature is displayed in the store conditions widget.
+### Open-Meteo API
 
-The API request handles three states:
+The Open-Meteo API provides live temperature data for the store conditions widget.
 
-- Loading while the request is running
-- Success when weather data is returned
-- Failure if the network or API is unavailable
+The request handles:
 
-The API does not require an API key.
+- A loading state while the weather is being fetched
+- A success state when the temperature is returned
+- An error state when the API or internet connection is unavailable
 
-Possible problems include a slow internet connection, the API being unavailable or the response not containing the expected data.
+### Products API
+
+The product catalogue is provided by a Flask REST API through the `/api/products` endpoint.
+
+During development, the API ran locally at `127.0.0.1:5000`. This address only worked on my computer. The API was later deployed publicly so that visitors to the GitHub Pages website could also retrieve the product data.
+
+The products request handles:
+
+- Loading while the API request is running
+- Success when product JSON is returned
+- Failure if the server, internet connection or response is unavailable
+
+The frontend is hosted on GitHub Pages, while the Flask API is hosted separately as a public web service.
 
 ## Technologies Used
 
