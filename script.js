@@ -231,7 +231,7 @@ async function loadProducts() {
 
     try {
         const response = await fetch(
-            "http://127.0.0.1:5000/api/products"
+            "https://smart-shopping-assistant-api.onrender.com/api/products"
         );
 
         if (!response.ok) {
