@@ -231,7 +231,7 @@ async function loadProducts() {
 
     try {
         const response = await fetch(
-            "https://YOUR-RENDER-APP.onrender.com/api/products"
+            "https://smart-shopping-assistant-api.onrender.com/api/products"
         );
 
         if (!response.ok) {
@@ -256,10 +256,7 @@ async function loadProducts() {
             </p>
         `;
 
-        console.error(
-            "Could not load products:",
-            error
-        );
+        console.error("Could not load products:", error);
     }
 }
 
