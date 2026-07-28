@@ -773,6 +773,112 @@ select:focus-visible {
     border-color: var(--danger);
 }
 
+.assistant-section {
+    padding:
+        5rem
+        max(2rem, calc((100% - var(--maximum-width)) / 2));
+
+    background-color: var(--surface);
+}
+
+.assistant-container {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 2.5rem;
+    padding: 2.5rem;
+    background:
+        linear-gradient(
+            135deg,
+            var(--background-dark),
+            var(--background-darker)
+        );
+    border-radius: var(--radius-large);
+    box-shadow: var(--shadow-large);
+}
+
+.assistant-introduction {
+    color: var(--text-light);
+}
+
+.assistant-introduction h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+}
+
+.assistant-introduction p:not(.eyebrow) {
+    max-width: 480px;
+    margin-top: 1rem;
+    color: var(--text-muted-light);
+}
+
+.assistant-form {
+    padding: 1.5rem;
+    background-color: var(--surface);
+    border-radius: var(--radius-medium);
+}
+
+.assistant-form label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+}
+
+.assistant-form textarea {
+    width: 100%;
+    min-height: 130px;
+    padding: 1rem;
+    resize: vertical;
+    color: var(--text-dark);
+    background-color: #fafafe;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-small);
+}
+
+.assistant-form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+#character-count {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
+.assistant-button {
+    min-height: 44px;
+    padding: 0.75rem 1.2rem;
+    color: var(--text-dark);
+    background-color: var(--primary);
+    border: none;
+    border-radius: var(--radius-small);
+    font-weight: 800;
+}
+
+.assistant-result {
+    grid-column: 1 / -1;
+    padding: 1.4rem;
+    color: var(--text-dark);
+    background-color: var(--surface);
+    border-left: 5px solid var(--primary);
+    border-radius: var(--radius-small);
+    white-space: pre-line;
+}
+
+.assistant-result.loading {
+    color: var(--text-muted);
+}
+
+.assistant-result.error {
+    color: #7c2525;
+    background-color: #fff1f1;
+    border-left-color: var(--danger);
+}
+
 .about-section {
     color: var(--text-light);
     background-color: var(--background-darker);
