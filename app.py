@@ -225,66 +225,84 @@ def suggest_basket():
         ]
     )
 
+    budget = extract_budget(need)
+
     prompt = f"""
 You are a practical shopping assistant.
 
 Available products:
 {product_summary}
 
-The shopper needs:
-"{need}"
-
-Suggest a sensible basket using only products from the available list.
+Suggest a basket for: "{need}"
 
 Rules:
-- Choose products that clearly match the shopper's stated meal or purpose.
-- Do not include unrelated products just to use more of the budget.
-- Prefer a small, coherent basket over a long list.
 - Use only products from the available list.
+- Choose products that match the shopper's meal or purpose.
+- Do not include unrelated products just to spend more.
+- Prefer a small, coherent basket.
+- Include each selected product's price.
 - If a budget is mentioned, stay within it.
-- Include each product's price.
-- End with the total cost and remaining budget.
-- Briefly explain why the products work together.
+- End with the total cost.
 
-Return this format:
-
-Suggested basket:
-- Product — £price
-- Product — £price
-
-Why this works:
-One short sentence.
-
+Return a short bulleted list followed by:
 Total: £0.00
-Remaining budget: £0.00
 """.strip()
 
     try:
-        response = requests.post(
-            "http://127.0.0.1:5050/v1/messages",
-            headers={
-                "anthropic-version": "2023-06-01"
-            },
-            json={
-                "model": "claude-sonnet-4-6",
-                "max_tokens": 400,
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": prompt
-                    }
-                ]
-            },
-            timeout=10
-        )
+        suggestion = call_mock_assistant(prompt)
+        total = extract_suggestion_total(suggestion)
+        retried = False
 
-        response.raise_for_status()
-        data = response.json()
+        # Budget guardrail: reject and retry once if the total is too high.
+        if (
+            budget is not None
+            and total is not None
+            and total > budget
+        ):
+            retried = True
 
-        suggestion = data["content"][0]["text"]
+            retry_prompt = f"""
+Your previous basket cost £{total:.2f}, which exceeded the budget.
+
+Available products:
+{product_summary}
+
+Suggest a basket for: "{need}"
+
+Maximum budget: £{budget:.2f}
+
+Rules:
+- The total must not exceed £{budget:.2f}.
+- Use only products from the available list.
+- Remove lower-priority items if necessary.
+- Include each selected product's price.
+- End with the corrected total.
+
+Return a short bulleted list followed by:
+Total: £0.00
+""".strip()
+
+            suggestion = call_mock_assistant(retry_prompt)
+            total = extract_suggestion_total(suggestion)
+
+        # Reject the second response if it is still over budget.
+        if (
+            budget is not None
+            and total is not None
+            and total > budget
+        ):
+            return jsonify({
+                "error": (
+                    "The assistant could not create a basket "
+                    "within the stated budget."
+                )
+            }), 422
 
         return jsonify({
-            "suggestion": suggestion
+            "suggestion": suggestion,
+            "budget": budget,
+            "checked_total": total,
+            "guardrail_retried": retried
         }), 200
 
     except requests.Timeout:
@@ -293,13 +311,21 @@ Remaining budget: £0.00
         }), 504
 
     except requests.RequestException as error:
-        app.logger.error("Mock assistant request failed: %s", error)
+        app.logger.error(
+            "Mock assistant request failed: %s",
+            error
+        )
 
         return jsonify({
             "error": "The assistant is unavailable right now."
         }), 502
 
-    except (KeyError, IndexError, TypeError):
+    except (KeyError, IndexError, TypeError, ValueError) as error:
+        app.logger.error(
+            "Unexpected assistant response: %s",
+            error
+        )
+
         return jsonify({
             "error": "The assistant returned an unexpected response."
         }), 502
