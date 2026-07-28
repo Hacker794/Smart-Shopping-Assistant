@@ -60,6 +60,7 @@ The products request handles:
 
 The frontend is hosted on GitHub Pages, while the Flask API is hosted separately as a public web service.
 
+
 ## Technologies Used
 
 - HTML
