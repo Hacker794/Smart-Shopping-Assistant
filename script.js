@@ -277,7 +277,7 @@ async function requestBasketSuggestion(need) {
 
     try {
         const response = await fetch(
-            "https://smart-shopping-assistant-api.onrender.com/api/suggestions",
+        "http://127.0.0.1:5000/api/suggestions",
             {
                 method: "POST",
                 headers: {
