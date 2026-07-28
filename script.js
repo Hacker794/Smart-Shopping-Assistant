@@ -266,6 +266,52 @@ async function loadProducts() {
     }
 }
 
+async function requestBasketSuggestion(need) {
+    assistantResult.hidden = false;
+    assistantResult.className = "assistant-result loading";
+    assistantResult.textContent =
+        "Creating your shopping suggestions...";
+
+    assistantButton.disabled = true;
+    assistantButton.textContent = "Thinking...";
+
+    try {
+        const response = await fetch(
+            "https://smart-shopping-assistant-api.onrender.com/api/suggestions",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    need: need
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.error || `HTTP error: ${response.status}`
+            );
+        }
+
+        assistantResult.className = "assistant-result";
+        assistantResult.textContent = data.suggestion;
+    } catch (error) {
+        assistantResult.className = "assistant-result error";
+        assistantResult.textContent =
+            error.message ||
+            "The Smart Assistant is unavailable right now.";
+
+        console.error("Assistant request failed:", error);
+    } finally {
+        assistantButton.disabled = false;
+        assistantButton.textContent = "Suggest a basket";
+    }
+}
+
 function clearBasket() {
     basket = [];
 
