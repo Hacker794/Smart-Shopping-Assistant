@@ -23,6 +23,12 @@ const clearBasketButton = document.querySelector(
     "#clear-basket"
 );
 
+const assistantForm = document.querySelector("#assistant-form");
+const shoppingNeedInput = document.querySelector("#shopping-need");
+const assistantButton = document.querySelector("#assistant-button");
+const assistantResult = document.querySelector("#assistant-result");
+const characterCount = document.querySelector("#character-count");
+
 let basket = [];
 
 function formatPrice(price) {
