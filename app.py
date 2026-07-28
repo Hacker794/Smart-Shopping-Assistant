@@ -1,4 +1,3 @@
-import os
 import requests
 
 from flask import Flask, jsonify, request
@@ -146,6 +145,77 @@ def home():
 def get_products():
     return jsonify(PRODUCTS), 200
 
+@app.route("/api/suggestions", methods=["POST"])
+def suggest_basket():
+    body = request.get_json(silent=True) or {}
+    need = body.get("need", "").strip()
+
+    if not need:
+        return jsonify({
+            "error": "Please describe what you are shopping for."
+        }), 400
+
+    if len(need) > 300:
+        return jsonify({
+            "error": "Your request must be 300 characters or fewer."
+        }), 400
+
+    product_summary = "\n".join(
+        [
+            f"{product['name']} - £{product['price']:.2f}"
+            for product in PRODUCTS
+        ]
+    )
+
+    prompt = f"""You are a shopping assistant. From this list:
+{product_summary}
+Suggest a basket for: "{need}". Stay under budget if given.
+Return a short bulleted list with a running total."""
+
+    try:
+        response = requests.post(
+            "http://127.0.0.1:5050/v1/messages",
+            headers={
+                "anthropic-version": "2023-06-01"
+            },
+            json={
+                "model": "claude-sonnet-4-6",
+                "max_tokens": 400,
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ]
+            },
+            timeout=10
+        )
+
+        response.raise_for_status()
+        data = response.json()
+
+        suggestion = data["content"][0]["text"]
+
+        return jsonify({
+            "suggestion": suggestion
+        }), 200
+
+    except requests.Timeout:
+        return jsonify({
+            "error": "The assistant took too long to respond."
+        }), 504
+
+    except requests.RequestException as error:
+        app.logger.error("Mock assistant request failed: %s", error)
+
+        return jsonify({
+            "error": "The assistant is unavailable right now."
+        }), 502
+
+    except (KeyError, IndexError, TypeError):
+        return jsonify({
+            "error": "The assistant returned an unexpected response."
+        }), 502
 
 @app.errorhandler(404)
 def route_not_found(error):
