@@ -106,6 +106,7 @@
                         <p>Your basket has been updated</p>
                     </div>
                 </div>
+                
 
                 <div class="preview-window">
                     <div class="preview-header">
@@ -160,6 +161,54 @@
                     <strong>£12.45</strong>
                 </div>
             </div>
+        </section>
+
+        <section class="assistant-section" id="assistant">
+    <div class="assistant-container">
+        <div class="assistant-introduction">
+            <p class="eyebrow">SMART ASSISTANT</p>
+
+            <h2>Tell us what you need</h2>
+
+            <p>
+                Describe the type of shop you are planning and the assistant
+                will suggest a basket using the available products.
+            </p>
+        </div>
+
+        <form id="assistant-form" class="assistant-form">
+            <label for="shopping-need">
+                What are you shopping for?
+            </label>
+
+            <textarea
+                id="shopping-need"
+                rows="4"
+                maxlength="300"
+                placeholder="For example: I need a simple breakfast for two people under £10."
+                required
+            ></textarea>
+
+            <div class="assistant-form-footer">
+                <span id="character-count">0 / 300</span>
+
+                <button
+                    type="submit"
+                    id="assistant-button"
+                    class="assistant-button"
+                >
+                    Suggest a basket
+                </button>
+            </div>
+        </form>
+
+        <div
+            id="assistant-result"
+            class="assistant-result"
+            aria-live="polite"
+            hidden
+        ></div>
+    </div>
         </section>
 
         <section class="shopping-section" id="products">
