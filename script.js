@@ -376,6 +376,28 @@ clearBasketButton.addEventListener(
     clearBasket
 );
 
+shoppingNeedInput.addEventListener("input", function () {
+    characterCount.textContent =
+        `${shoppingNeedInput.value.length} / 300`;
+});
+
+assistantForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const need = shoppingNeedInput.value.trim();
+
+    if (!need) {
+        assistantResult.hidden = false;
+        assistantResult.className = "assistant-result error";
+        assistantResult.textContent =
+            "Please describe what you are shopping for.";
+
+        return;
+    }
+
+    requestBasketSuggestion(need);
+});
+
 async function loadWeather() {
     const weatherBox = document.querySelector("#weather");
 
