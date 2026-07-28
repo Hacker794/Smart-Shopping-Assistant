@@ -167,10 +167,39 @@ def suggest_basket():
         ]
     )
 
-    prompt = f"""You are a shopping assistant. From this list:
+    prompt = f"""
+You are a practical shopping assistant.
+
+Available products:
 {product_summary}
-Suggest a basket for: "{need}". Stay under budget if given.
-Return a short bulleted list with a running total."""
+
+The shopper needs:
+"{need}"
+
+Suggest a sensible basket using only products from the available list.
+
+Rules:
+- Choose products that clearly match the shopper's stated meal or purpose.
+- Do not include unrelated products just to use more of the budget.
+- Prefer a small, coherent basket over a long list.
+- Use only products from the available list.
+- If a budget is mentioned, stay within it.
+- Include each product's price.
+- End with the total cost and remaining budget.
+- Briefly explain why the products work together.
+
+Return this format:
+
+Suggested basket:
+- Product — £price
+- Product — £price
+
+Why this works:
+One short sentence.
+
+Total: £0.00
+Remaining budget: £0.00
+""".strip()
 
     try:
         response = requests.post(
