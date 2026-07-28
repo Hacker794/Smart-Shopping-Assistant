@@ -1,3 +1,4 @@
+import re
 import requests
 
 from flask import Flask, jsonify, request
@@ -132,6 +133,63 @@ PRODUCTS = [
         "image": "🫐"
     }
 ]
+
+def extract_budget(need):
+    """Return a budget such as £20 from the shopper's request."""
+
+    match = re.search(
+        r"(?:under|budget(?:\s+of)?|maximum|max)\s*£\s*(\d+(?:\.\d{1,2})?)",
+        need,
+        re.IGNORECASE
+    )
+
+    if not match:
+        return None
+
+    return float(match.group(1))
+
+
+def extract_suggestion_total(suggestion):
+    """Read the final total from the assistant's response."""
+
+    matches = re.findall(
+        r"(?:running\s+total|total)\s*:\s*£\s*(\d+(?:\.\d{1,2})?)",
+        suggestion,
+        re.IGNORECASE
+    )
+
+    if not matches:
+        return None
+
+    return float(matches[-1])
+
+
+def call_mock_assistant(prompt):
+    """Send one request to the supplied mock assistant."""
+
+    response = requests.post(
+        "http://127.0.0.1:5050/v1/messages",
+        headers={
+            "anthropic-version": "2023-06-01"
+        },
+        json={
+            "model": "claude-sonnet-4-6",
+            "max_tokens": 400,
+            "messages": [
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ]
+        },
+        timeout=10
+    )
+
+    response.raise_for_status()
+
+    data = response.json()
+
+    return data["content"][0]["text"]
 
 @app.route("/", methods=["GET"])
 def home():
