@@ -1051,6 +1051,19 @@ select:focus-visible {
         position: static;
     }
 
+    .assistant-section {
+        padding: 4rem 1rem;
+    }
+
+    .assistant-container {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+    }
+
+    .assistant-result {
+        grid-column: auto;
+    }
+
     .site-footer {
         align-items: flex-start;
         flex-direction: column;
