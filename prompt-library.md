@@ -1,8 +1,6 @@
 # Smart Assistant Prompt Library
 
-These prompts use the S.C.C.E.F. approach: role, context, clear task, constraints, examples and output format.
-
-## Prompt 1 — General basket suggestion 
+## Prompt 1 — General Basket Suggestion
 
 ```text
 You are a practical shopping assistant.
@@ -27,8 +25,11 @@ Rules:
 Return a short bulleted list.
 ```
 
-## Prompt 2 - Budget-focused basket
- 
+**Why it works:** This prompt grounds the assistant in the real catalogue and limits it to relevant products; without these constraints, it could invent products or return an unfocused basket.
+
+## Prompt 2 — Budget-Focused Basket
+
+```text
 You are a budget-conscious shopping assistant.
 
 Available products:
@@ -54,9 +55,13 @@ Suggested basket:
 
 Total: £0.00
 Remaining budget: £0.00
+```
 
-## Prompt 3 - Retry after budget failure
+**Why it works:** This prompt makes the budget a hard requirement and gives a fixed response format; without that, the assistant could overspend or return a total that is difficult to validate.
 
+## Prompt 3 — Retry After Budget Failure
+
+```text
 Your previous basket exceeded the shopper's budget.
 
 Available products:
@@ -77,13 +82,6 @@ Rules:
 - End with the corrected total.
 
 Return a short bulleted list followed by the total.
+```
 
-
-
-
-
-
-
-
-
- 
+**Why it works:** This prompt explains exactly why the first response was rejected and gives a precise correction target; without it, a retry could repeat the same over-budget mistake.

@@ -94,14 +94,13 @@ It was designed to work at:
 
 ```text
 Smart-Shopping-Assistant/
-├── images/
 ├── app.py
 ├── index.html
 ├── mock_llm_server.py
 ├── prompt-library.md
 ├── README.md
 ├── requirements.txt
-├── RESPONSIBLE-AI.md
+├── Responsible-AI.md
 ├── script.js
 └── style.css
 ```

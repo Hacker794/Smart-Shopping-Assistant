@@ -26,6 +26,7 @@ PRODUCTS = [
         "price": 1.35,
         "aisle": "Dairy Alternatives",
         "image": "🥛"
+        "inStock": True
     },
     {
         "id": 2,
@@ -33,6 +34,7 @@ PRODUCTS = [
         "price": 2.20,
         "aisle": "Bakery",
         "image": "🥖"
+        "inStock": True
     },
     {
         "id": 3,
@@ -40,6 +42,7 @@ PRODUCTS = [
         "price": 1.10,
         "aisle": "Fruit and Vegetables",
         "image": "🍌"
+        "inStock": True
     },
     {
         "id": 4,
@@ -47,6 +50,7 @@ PRODUCTS = [
         "price": 2.75,
         "aisle": "Dairy",
         "image": "🥚"
+        "inStock": True
     },
     {
         "id": 5,
@@ -54,6 +58,7 @@ PRODUCTS = [
         "price": 1.25,
         "aisle": "Cupboard",
         "image": "🍝"
+        "inStock": True
     },
     {
         "id": 6,
@@ -61,6 +66,7 @@ PRODUCTS = [
         "price": 1.80,
         "aisle": "Cupboard",
         "image": "🍅"
+        "inStock": True
     },
     {
         "id": 7,
@@ -68,6 +74,7 @@ PRODUCTS = [
         "price": 4.50,
         "aisle": "Meat",
         "image": "🍗"
+        "inStock": True
     },
     {
         "id": 8,
@@ -75,6 +82,7 @@ PRODUCTS = [
         "price": 1.95,
         "aisle": "Dairy",
         "image": "🥣"
+        "inStock": True
     },
     {
         "id": 9,
@@ -82,6 +90,7 @@ PRODUCTS = [
         "price": 2.10,
         "aisle": "Drinks",
         "image": "🧃"
+        "inStock": True
     },
     {
         "id": 10,
@@ -89,6 +98,7 @@ PRODUCTS = [
         "price": 1.60,
         "aisle": "Snacks",
         "image": "🍫"
+        "inStock": False
     },
     {
         "id": 11,
@@ -96,6 +106,7 @@ PRODUCTS = [
         "price": 1.85,
         "aisle": "Fruit and Vegetables",
         "image": "🥑"
+        "inStock": True
     },
     {
         "id": 12,
@@ -103,6 +114,7 @@ PRODUCTS = [
         "price": 3.25,
         "aisle": "Dairy",
         "image": "🧀"
+        "inStock": True
     },
     {
         "id": 13,
@@ -110,6 +122,7 @@ PRODUCTS = [
         "price": 0.85,
         "aisle": "Drinks",
         "image": "💧"
+        "inStock": True
     },
     {
         "id": 14,
@@ -117,6 +130,7 @@ PRODUCTS = [
         "price": 1.50,
         "aisle": "Snacks",
         "image": "🥔"
+        "inStock": True
     },
     {
         "id": 15,
@@ -124,6 +138,7 @@ PRODUCTS = [
         "price": 3.75,
         "aisle": "Dairy Alternatives",
         "image": "🍔"
+        "inStock": False
     },
     {
         "id": 16,
@@ -131,6 +146,7 @@ PRODUCTS = [
         "price": 3.40,
         "aisle": "Frozen",
         "image": "🫐"
+        "inStock": False
     }
 ]
 
@@ -201,7 +217,13 @@ def home():
 
 @app.route("/api/products", methods=["GET"])
 def get_products():
-    return jsonify(PRODUCTS), 200
+    available_products = [
+        product
+        for product in PRODUCTS
+        if product.get("inStock", False)
+    ]
+
+    return jsonify(available_products), 200
 
 @app.route("/api/suggestions", methods=["POST"])
 def suggest_basket():
@@ -218,10 +240,16 @@ def suggest_basket():
             "error": "Your request must be 300 characters or fewer."
         }), 400
 
+    available_products = [
+        product
+        for product in PRODUCTS
+        if product.get("inStock", False)
+    ]
+
     product_summary = "\n".join(
         [
             f"{product['name']} - £{product['price']:.2f}"
-            for product in PRODUCTS
+            for product in available_products
         ]
     )
 
