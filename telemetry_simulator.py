@@ -16,8 +16,8 @@ class Trolley:
         self.x += speed*dt*math.cos(self.heading)
         self.y += speed*dt*math.sin(self.heading)
         self.battery = max(0, self.battery - 0.05)
-        return {"id":self.id,"x":round(self.x,2),"y":round(self.y,2),
-            "battery":round(self.battery,1)}
+        return {"id":self.id,"x":round(self.x,2),"y":round(self.y,2),"speed": round(speed,2),"heading":round(self.heading,2),
+            "battery":round(self.battery,1), "basket_kg":round(self.basket_kg,2)}
 
 fleet=[Trolley(i) for i in range(3)]
 for _ in range(20):
