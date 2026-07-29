@@ -1,5 +1,6 @@
 import re
 import requests
+import os 
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -209,6 +210,11 @@ def call_mock_assistant(prompt):
 
     return data["content"][0]["text"]
 
+
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify({"status": "ok"}), 200
+
 @app.route("/", methods=["GET"])
 def home():
     return jsonify({
@@ -360,11 +366,6 @@ Total: £0.00
             "error": "The assistant returned an unexpected response."
         }), 502
 
-@app.route("/health", methods=["GET"])
-def health():
-    return jsonify({"status": "ok"}), 200
-
-
 @app.route("/api/telemetry", methods=["GET"])
 def telemetry():
     trolley = Trolley(1)
@@ -377,6 +378,6 @@ def route_not_found(error):
         "error": "Route not found"
     }), 404
 
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
