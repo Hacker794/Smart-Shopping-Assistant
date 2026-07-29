@@ -138,7 +138,7 @@ PRODUCTS = [
         "price": 3.75,
         "aisle": "Dairy Alternatives",
         "image": "🍔",
-        "inStock": False
+        "inStock": True
     },
     {
         "id": 16,
@@ -146,7 +146,7 @@ PRODUCTS = [
         "price": 3.40,
         "aisle": "Frozen",
         "image": "🫐",
-        "inStock": False
+        "inStock": True
     }
 ]
 
