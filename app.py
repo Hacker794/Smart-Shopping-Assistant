@@ -4,6 +4,8 @@ import requests
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
+from telemetry_simulator import Trolley
+
 app = Flask(__name__)
 
 CORS(
@@ -357,6 +359,17 @@ Total: £0.00
         return jsonify({
             "error": "The assistant returned an unexpected response."
         }), 502
+
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify({"status": "ok"}), 200
+
+
+@app.route("/api/telemetry", methods=["GET"])
+def telemetry():
+    trolley = Trolley(1)
+
+    return jsonify(trolley.step()), 200
 
 @app.errorhandler(404)
 def route_not_found(error):
