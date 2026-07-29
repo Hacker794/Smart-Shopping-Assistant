@@ -25,7 +25,7 @@ PRODUCTS = [
         "name": "Oat Milk 1L",
         "price": 1.35,
         "aisle": "Dairy Alternatives",
-        "image": "🥛"
+        "image": "🥛",
         "inStock": True
     },
     {
@@ -33,7 +33,7 @@ PRODUCTS = [
         "name": "Sourdough Loaf",
         "price": 2.20,
         "aisle": "Bakery",
-        "image": "🥖"
+        "image": "🥖",
         "inStock": True
     },
     {
@@ -41,7 +41,7 @@ PRODUCTS = [
         "name": "Bananas 5 Pack",
         "price": 1.10,
         "aisle": "Fruit and Vegetables",
-        "image": "🍌"
+        "image": "🍌",
         "inStock": True
     },
     {
@@ -49,7 +49,7 @@ PRODUCTS = [
         "name": "Free Range Eggs",
         "price": 2.75,
         "aisle": "Dairy",
-        "image": "🥚"
+        "image": "🥚",
         "inStock": True
     },
     {
@@ -57,7 +57,7 @@ PRODUCTS = [
         "name": "Penne Pasta 500g",
         "price": 1.25,
         "aisle": "Cupboard",
-        "image": "🍝"
+        "image": "🍝",
         "inStock": True
     },
     {
@@ -65,7 +65,7 @@ PRODUCTS = [
         "name": "Tomato Pasta Sauce",
         "price": 1.80,
         "aisle": "Cupboard",
-        "image": "🍅"
+        "image": "🍅",
         "inStock": True
     },
     {
@@ -73,7 +73,7 @@ PRODUCTS = [
         "name": "Chicken Breast 500g",
         "price": 4.50,
         "aisle": "Meat",
-        "image": "🍗"
+        "image": "🍗",
         "inStock": True
     },
     {
@@ -81,7 +81,7 @@ PRODUCTS = [
         "name": "Greek Yoghurt",
         "price": 1.95,
         "aisle": "Dairy",
-        "image": "🥣"
+        "image": "🥣",
         "inStock": True
     },
     {
@@ -89,7 +89,7 @@ PRODUCTS = [
         "name": "Orange Juice 1L",
         "price": 2.10,
         "aisle": "Drinks",
-        "image": "🧃"
+        "image": "🧃",
         "inStock": True
     },
     {
@@ -97,7 +97,7 @@ PRODUCTS = [
         "name": "Dark Chocolate",
         "price": 1.60,
         "aisle": "Snacks",
-        "image": "🍫"
+        "image": "🍫",
         "inStock": False
     },
     {
@@ -105,7 +105,7 @@ PRODUCTS = [
         "name": "Avocado Twin Pack",
         "price": 1.85,
         "aisle": "Fruit and Vegetables",
-        "image": "🥑"
+        "image": "🥑",
         "inStock": True
     },
     {
@@ -113,7 +113,7 @@ PRODUCTS = [
         "name": "Cheddar Cheese 350g",
         "price": 3.25,
         "aisle": "Dairy",
-        "image": "🧀"
+        "image": "🧀",
         "inStock": True
     },
     {
@@ -121,7 +121,7 @@ PRODUCTS = [
         "name": "Still Water 1.5L",
         "price": 0.85,
         "aisle": "Drinks",
-        "image": "💧"
+        "image": "💧",
         "inStock": True
     },
     {
@@ -129,7 +129,7 @@ PRODUCTS = [
         "name": "Salted Crisps",
         "price": 1.50,
         "aisle": "Snacks",
-        "image": "🥔"
+        "image": "🥔",
         "inStock": True
     },
     {
@@ -137,7 +137,7 @@ PRODUCTS = [
         "name": "Plant-Based Burgers",
         "price": 3.75,
         "aisle": "Dairy Alternatives",
-        "image": "🍔"
+        "image": "🍔",
         "inStock": False
     },
     {
@@ -145,7 +145,7 @@ PRODUCTS = [
         "name": "Frozen Mixed Berries",
         "price": 3.40,
         "aisle": "Frozen",
-        "image": "🫐"
+        "image": "🫐",
         "inStock": False
     }
 ]
