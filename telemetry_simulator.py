@@ -1,5 +1,4 @@
 import random, json, math
-from turtle import speed
 
 class Trolley:
     def __init__(self, id):
