@@ -182,12 +182,16 @@ def extract_suggestion_total(suggestion):
 
     return float(matches[-1])
 
-
 def call_mock_assistant(prompt):
-    """Send one request to the supplied mock assistant."""
+    """Send one request to the configured assistant service."""
+
+    assistant_url = os.environ.get(
+        "ASSISTANT_URL",
+        "http://127.0.0.1:5050/v1/messages"
+    )
 
     response = requests.post(
-        "http://127.0.0.1:5050/v1/messages",
+        assistant_url,
         headers={
             "anthropic-version": "2023-06-01"
         },
