@@ -101,7 +101,7 @@ PRODUCTS = [
         "price": 1.60,
         "aisle": "Snacks",
         "image": "🍫",
-        "inStock": False
+        "inStock": True
     },
     {
         "id": 11,
