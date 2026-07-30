@@ -239,8 +239,26 @@ def get_products():
 
 @app.route("/api/suggestions", methods=["POST"])
 def suggest_basket():
-    body = request.get_json(silent=True) or {}
-    need = body.get("need", "").strip()
+    if not request.is_json:
+        return jsonify({
+            "error": "Request body must be JSON."
+        }), 415
+
+    body = request.get_json(silent=True)
+
+    if not isinstance(body, dict):
+        return jsonify({
+            "error": "Invalid JSON request."
+        }), 400
+
+    need = body.get("need")
+
+    if not isinstance(need, str):
+        return jsonify({
+            "error": "The need field must be text."
+        }), 400
+
+    need = need.strip()
 
     if not need:
         return jsonify({
