@@ -403,6 +403,38 @@ def route_not_found(error):
         "error": "Route not found"
     }), 404
 
+@app.errorhandler(400)
+def bad_request(error):
+    return jsonify({
+        "error": "Invalid request."
+    }), 400
+
+
+@app.errorhandler(413)
+def request_too_large(error):
+    return jsonify({
+        "error": "Request body is too large."
+    }), 413
+
+
+@app.errorhandler(415)
+def unsupported_media_type(error):
+    return jsonify({
+        "error": "Request body must use JSON."
+    }), 415
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    app.logger.error(
+        "Unexpected server error: %s",
+        error
+    )
+
+    return jsonify({
+        "error": "An unexpected server error occurred."
+    }), 500
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
