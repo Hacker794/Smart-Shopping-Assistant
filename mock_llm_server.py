@@ -105,6 +105,12 @@ def render(basket, total, budget):
         lines.append(f"Budget £{budget:.2f} — £{headroom:.2f} remaining.")
     return "\n".join(lines)
 
+@app.route("/health", methods=["GET"])
+def health():
+    return {
+        "status": "ok",
+        "service": "mock-llm"
+    }
 
 @app.post("/v1/messages")
 def messages():
