@@ -143,12 +143,6 @@ def messages():
                   "output_tokens": len(text) // 4},
     })
 
-
-@app.get("/health")
-def health():
-    return jsonify({"status": "ok", "service": "knull-mock-llm"})
-
-
 if __name__ == "__main__":
     print("Mock LLM on http://127.0.0.1:5050/v1/messages  (Ctrl-C to stop)")
     app.run(port=5050, debug=False)
