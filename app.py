@@ -70,7 +70,7 @@ PRODUCTS = [
         "price": 1.25,
         "aisle": "Cupboard",
         "image": "🍝",
-        "inStock": True
+        "inStock": False
     },
     {
         "id": 6,
@@ -110,7 +110,7 @@ PRODUCTS = [
         "price": 1.60,
         "aisle": "Snacks",
         "image": "🍫",
-        "inStock": True
+        "inStock": False
     },
     {
         "id": 11,
