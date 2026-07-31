@@ -196,7 +196,7 @@ def call_mock_assistant(prompt):
 
     assistant_url = os.environ.get(
         "ASSISTANT_URL",
-        "https://mock-llm-server.onrender.com/v1/messages"
+        "http://127.0.0.1:5050/v1/messages"
     )
 
     response = requests.post(
